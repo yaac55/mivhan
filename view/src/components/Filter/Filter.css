@@ -1,0 +1,53 @@
+.select-no-box-and-padding {
+    border: none;
+}
+
+.select-no-box-and-padding:focus {
+    box-shadow: none;
+}
+
+.filter{
+    font-size: 0.8em;
+    color: grey;
+    font-weight: bold;
+}
+
+.go{
+    font-size:1.5em;
+    cursor: pointer;
+    color: #6E75F5;
+    font-weight: bold;
+}
+
+.arrow-down{
+    vertical-align: middle;
+    font-size: initial;
+}
+
+.popover .arrow {
+    display: none;
+}
+
+.form-check-label{
+    font-size:1.5em;
+    font-weight: bold;
+}
+
+.dollar{
+    color: aqua;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.input-without-border{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    width:auto;
+    box-shadow: none;
+}
+
+.align-go{
+    display:flex;
+    justify-content: flex-end;
+}

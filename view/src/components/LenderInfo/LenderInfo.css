@@ -1,0 +1,10 @@
+.number-list{
+    display:flex;
+    align-self: stretch;
+    align-items: center;
+    background-color: white;
+}
+
+.center-text{
+    padding-right:0;
+}

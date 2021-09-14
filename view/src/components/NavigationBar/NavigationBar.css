@@ -1,0 +1,16 @@
+.logout{
+    cursor:pointer;
+    color:#FF3863;
+    font-size:1rem;
+    font-weight: bold;
+}
+
+.link{
+    color:black;
+    font-size:1rem;
+    font-weight: bold;
+}
+
+.logo-logout{
+    vertical-align: middle;
+}

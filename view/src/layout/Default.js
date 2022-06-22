@@ -2,13 +2,13 @@ import React, {useContext} from 'react';
 import {Navbar,Container,Nav} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { FiLogOut } from "react-icons/fi";
-import {userContext} from '../../services/userContext';
-import Logo from '../../services/img/logo.png'
-import './NavigationBar.css';
+import {userConnect} from '../store/userConnect';
+import Logo from '../assets/logo.png'
+import './Default.css';
 
-function NavigationBar(){
+function Default(){
 
-    const {connect,setConnect} = useContext(userContext);
+    const {connect,setConnect} = useContext(userConnect);
 
     const Logout = (e) => {
         localStorage.setItem('token', "");
@@ -39,4 +39,4 @@ function NavigationBar(){
         </Navbar>
     )
 }
-export default NavigationBar;
+export default Default;

@@ -4,7 +4,7 @@ const routes = require('./routes/index');
 var cors = require('cors');
 
 //connexion to db
-mongoose.connect('mongodb+srv://yaacov:Yaacov44@cluster0.hqpcj.mongodb.net/200app',
+mongoose.connect('mongodb://localhost:27017/test',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('SUCCESS !'))

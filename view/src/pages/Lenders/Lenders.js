@@ -2,9 +2,9 @@ import React, {useContext,useState} from 'react';
 import Filter from "../../components/Filter/Filter";
 import LenderInfo from "../../components/LenderInfo/LenderInfo";
 import TotalsLoans from "../../components/TotalsLoans";
-import {userContext} from '../../services/userContext';
+import {userConnect} from '../../store/userConnect';
 import {data} from '../../services/constante';
-import {useHistory} from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import {Container,Row,Col} from 'react-bootstrap';
 import { SiMicrosoftexcel } from "react-icons/si";
 
@@ -16,8 +16,8 @@ function Lenders(props) {
     const [lendersFilter,setLendersFilter] = useState(data);
     const [typeFilterAmount,setTypeFilterAmount] = useState("");
     const [valueFilterAmount,setValueFilterAmount] = useState();
-    const {connect,setConnect} = useContext(userContext);
-    let history = useHistory();
+    const {connect,setConnect} = useContext(userConnect);
+    let history = useNavigate();
     
     
     const handleChangeTypeFilterAmount = (e) => {
@@ -71,8 +71,6 @@ function Lenders(props) {
         
     }
 
-    if(connect)
-    {
         return(
             <Container>
                 <Row className="justify-content-end mt-4 mb-4">
@@ -133,13 +131,6 @@ function Lenders(props) {
                 })}
             </Container>
         )
-    }
-    else
-    {
-        return(
-        <div>{history.push('/login')}</div>
-        );
-    }
 }
 
 export default Lenders;

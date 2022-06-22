@@ -1,6 +1,8 @@
 const {User} = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const saltRounds = 10;
+
 
 
 /**
@@ -11,30 +13,33 @@ const jwt = require('jsonwebtoken');
  */
 exports.login = async (req, res) => {
 
-    const user = await User.findOne({ userName: req.body.userName })
-    
+    const {password,userName} = req.body;
+
+    const user = await User.findOne({ userName})
     if(!user)
     {
-      res.status(401).json({ error: 'error' });
-    }
-    //crypt password
-    bcrypt.compare(req.body.password, user.password)
-    .then(valid => {
-      if (!valid) {
-        res.status(401).json({ error: 'error' });
-      }
-    })
-    .catch(error => res.status(500).json({ error }));
-    
-    res.status(200).json({
-      token: jwt.sign(
-        { userId: user._id },
-        'RANDOM_TOKEN_SECRET',
-        { expiresIn: '24h'}
-      ),
-      message: 'connexion successful.'
-    });           
-
+      res.status(401).json({ error: 'user doesnt exist' });
+    }else{
+      //decrypt password
+      bcrypt.compare(password, user.password)
+      .then(valid => {
+        if (!valid) {
+          console.log(valid);
+          res.status(401).json({ error: 'wrong password' });
+        }else{
+          console.log(valid);
+          res.status(200).json({
+            token: jwt.sign(
+              { userId: user._id },
+              'RANDOM_TOKEN_SECRET',
+              { expiresIn: '24h'}
+            ),
+            message: 'connexion successful.'
+          }); 
+        }
+      })
+      .catch(error => res.status(500).json({ error }));
+    }          
   };
   
   //function to check if token is good
@@ -57,4 +62,29 @@ exports.login = async (req, res) => {
       }
     };
 
+    exports.sign_up = async (req, res) => {
+      
+      const {password,userName} = req.body;
+      console.log(password,userName);
+      const user = await User.findOne({ userName})
+      if(user)
+      {
+        res.status(401).json({ error: 'user already exist' });
+      }else{
+        bcrypt.genSalt(saltRounds, (err, salt) => {
+            bcrypt.hash(password, salt, function(err, hash) {
+              console.log(hash);
+              let user  = new User({userName,password: hash});
+              user.save().then((results)=>{
+                res.status(200).send('create succesfully');
+              },(error)=> {
+                  res.status(400).send(error);
+              });
+            });
+        });
+      }
+
+   
+
+    }
 
